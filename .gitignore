@@ -1,0 +1,6 @@
+*.class
+*.log
+*.dat
+.vscode/settings.json
+bin/
+out/
