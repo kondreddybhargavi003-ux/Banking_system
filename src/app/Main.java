@@ -3,8 +3,10 @@ package app;
 import config.AppConfig;
 import java.nio.file.Path;
 import menu.Menu;
+import model.Account;
 import repository.BankRepository;
 import service.TransactionService;
+import util.AccountNumberGenerator;
 import util.FileUtil;
 
 /**
@@ -30,6 +32,9 @@ public class Main {
 
         BankRepository bankRepository = new BankRepository();
         int loadedAccounts = bankRepository.loadAccounts();
+        AccountNumberGenerator.initializeFromExistingAccountNumbers(
+                bankRepository.getAllAccounts().stream().map(Account::getAccountNumber).toList()
+        );
 
         TransactionService transactionService = new TransactionService();
         int loadedTransactions = transactionService.loadTransactions();

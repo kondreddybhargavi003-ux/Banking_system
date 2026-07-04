@@ -9,6 +9,7 @@ import model.Transaction;
 import repository.BankRepository;
 import service.BankService;
 import service.TransactionService;
+import util.AccountNumberGenerator;
 
 /**
  * Console-based presentation layer for the banking system.
@@ -89,9 +90,6 @@ public class Menu {
 
     private void createAccount(String accountType) {
         try {
-            System.out.print("Enter account number: ");
-            String accountNumber = scanner.nextLine().trim();
-
             System.out.print("Enter customer name: ");
             String customerName = scanner.nextLine().trim();
 
@@ -107,6 +105,7 @@ public class Menu {
             System.out.print("Enter initial balance: ");
             double initialBalance = readDoubleInput();
 
+            String accountNumber = AccountNumberGenerator.generateAccountNumber();
             Account account;
 
             switch (accountType) {
@@ -117,6 +116,7 @@ public class Menu {
             }
 
             System.out.println("Account created successfully.");
+            System.out.println("Generated Account Number: " + accountNumber);
             System.out.println(account);
             System.out.println("Customer details: " + customerName + ", " + phoneNumber + ", " + email + ", " + address);
         } catch (BankException | IllegalArgumentException e) {
